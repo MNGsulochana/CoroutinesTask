@@ -1,5 +1,7 @@
 package com.example.coroutinesample.adapter
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,8 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coroutinesample.R
 import com.example.coroutinesample.datamodel.PostModelItem
+import com.example.coroutinesample.db.AppDataBase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class PostAdapter(private var postsList:List<PostModelItem>) :RecyclerView.Adapter<PostAdapter.PostViewHolder>(){
+class PostAdapter(private var postsList:List<PostModelItem>,private var context:Context) :RecyclerView.Adapter<PostAdapter.PostViewHolder>(){
     class PostViewHolder(view:View):RecyclerView.ViewHolder(view)
     {
         var title: TextView = view.findViewById(R.id.textTitle)
@@ -28,6 +35,7 @@ class PostAdapter(private var postsList:List<PostModelItem>) :RecyclerView.Adapt
         holder.title.text = "TITLE :   "+posts.title
         holder.id.text = "ID :   "+posts.id
         holder.body.text = "BODY :  "+posts.body
+
     }
 
     override fun getItemCount(): Int {
