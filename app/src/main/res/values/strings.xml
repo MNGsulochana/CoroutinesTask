@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">CoroutineSample</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="home">WELCOME TO HOME</string>
+    <string name="signup">SIGNUP</string>
+    <string name="login">LOGIN</string>
+    <string name="signuppage">welcome to SignUp page</string>
+    <string name="loginpage">welcome to login page</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="welcome">WELCOME TO  MOBIOTICS</string>
 </resources>
