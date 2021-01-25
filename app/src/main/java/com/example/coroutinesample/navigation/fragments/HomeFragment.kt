@@ -28,7 +28,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         signUpButton=view.findViewById(R.id.signupButton)
         loginButton=view.findViewById(R.id.loginButton)
+
         var navController=Navigation.findNavController(view)
+
         signUpButton.setOnClickListener {
             navController.navigate(R.id.action_homeFragment_to_signUpFragment)
         }

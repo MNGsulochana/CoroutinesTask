@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         recyclerView=findViewById(R.id.recyclerViewpost)
         val client = apiClient.getClient()
+
         GlobalScope.launch {
             val resultPosts = client.getPosts()
             withContext(Dispatchers.IO)
