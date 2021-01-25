@@ -26,7 +26,6 @@ lateinit var  recyclerView: RecyclerView
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         recyclerView=findViewById(R.id.recyclerViewpost)
-       // val recyclerView: RecyclerView = findViewById(R.id.recyclerViewpost)
         val client = apiClient.getClient()
         GlobalScope.launch {
             val resultPosts = client.getPosts()
@@ -36,11 +35,6 @@ lateinit var  recyclerView: RecyclerView
                 if (resultPosts.isSuccessful) {
                     postAdapter = PostAdapter(resultPosts.body() as ArrayList)
                     setAdapter(postAdapter)
-                    /*val layoutManager = LinearLayoutManager(applicationContext)
-                    recyclerView.layoutManager = layoutManager
-                    recyclerView.itemAnimator = DefaultItemAnimator()
-                    recyclerView.adapter = postAdapter
-                    postAdapter.notifyDataSetChanged()*/
                 } else
                     Log.d("fail", "falsls")
             }
@@ -56,43 +50,3 @@ lateinit var  recyclerView: RecyclerView
         this.postAdapter.notifyDataSetChanged() //no need of this
     }
 }
-// postAdapter= PostAdapter(postList)
-// val layoutManager = LinearLayoutManager(applicationContext)
-// recyclerView.layoutManager = layoutManager
-// recyclerView.itemAnimator = DefaultItemAnimator()
-// recyclerView.adapter = postAdapter
-// postAdapter.notifyDataSetChanged()
-// }
-// getRecyclerView(resultPosts.body())
-// // Log.d("success", "get successs ${resultPosts.body()?.size} dta values ${resultPosts.body()?.get(99)?.id}")
-// else
-// Log.d("fail", "falsls")
-// }
-// }
-//
-//
-// //  moviesAdapter = MoviesAdapter(movieList)
-// /*     postAdapter= PostAdapter(postList)
-// val layoutManager = LinearLayoutManager(applicationContext)
-// recyclerView.layoutManager = layoutManager
-// recyclerView.itemAnimator = DefaultItemAnimator()
-// recyclerView.adapter = postAdapter
-// postAdapter.notifyDataSetChanged()
-// *//*
-//
-//
-// }
-//
-// private fun getRecyclerView(body: List<PostModelItem>? ) {
-// postList.addAll(body as ArrayList)
-// postAdapter= PostAdapter(postList)
-//
-// /*val layoutManager = LinearLayoutManager(applicationContext)
-// recyclerView.layoutManager = layoutManager
-// recyclerView.itemAnimator = DefaultItemAnimator()
-// recyclerView.adapter = postAdapter*//*
-//
-// postAdapter.notifyDataSetChanged()
-//
-// }
-// }*/
