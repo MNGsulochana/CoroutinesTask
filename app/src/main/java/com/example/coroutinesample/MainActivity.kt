@@ -53,7 +53,7 @@ lateinit var  recyclerView: RecyclerView
         recyclerView.layoutManager = layoutManager
         recyclerView.itemAnimator = DefaultItemAnimator()
         recyclerView.adapter = this.postAdapter
-        this.postAdapter.notifyDataSetChanged()
+        this.postAdapter.notifyDataSetChanged() //no need of this
     }
 }
 // postAdapter= PostAdapter(postList)
