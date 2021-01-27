@@ -8,26 +8,21 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.Navigation
 import com.example.coroutinesample.R
+import com.example.coroutinesample.databinding.FragmentLoginBinding
 
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(R.layout.fragment_login) {
 
-    lateinit var loginButton:Button
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
-    }
+    lateinit var loginBinding: FragmentLoginBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginButton=view.findViewById(R.id.loginButons)
         var navController=Navigation.findNavController(view)
-        loginButton.setOnClickListener {
+        loginBinding= FragmentLoginBinding.bind(view)
+        loginBinding.loginButons.setOnClickListener {
             navController.navigate(R.id.action_loginFragment_to_welcomeFragment)
         }
+
     }
 
 }

@@ -12,14 +12,16 @@ android {
 
     defaultConfig {
         applicationId "com.example.coroutinesample"
-        minSdkVersion 19
+        minSdkVersion 20
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    buildFeatures {
+        viewBinding true
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -58,9 +60,13 @@ dependencies {
     implementation "androidx.room:room-ktx:2.2.6"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
 
+    //dagger
     implementation 'com.google.dagger:dagger:2.31.2'
     kapt 'com.google.dagger:dagger-compiler:2.31.2'
-
+    //dagger android
+    implementation 'com.google.dagger:dagger-android:2.31.2'
+    implementation 'com.google.dagger:dagger-android-support:2.31.2'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.31.2'
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.2"
     implementation "androidx.navigation:navigation-ui-ktx:2.3.2"
 

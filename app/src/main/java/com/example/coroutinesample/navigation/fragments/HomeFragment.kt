@@ -9,50 +9,47 @@ import android.widget.Button
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.coroutinesample.R
+import com.example.coroutinesample.databinding.FragmentHomeBinding
 
 
-class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+class HomeFragment : Fragment(R.layout.fragment_home){
+   /* // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     lateinit var signUpButton: Button;
     lateinit var loginButton: Button
+*/
+    lateinit var fragmentHomeBinding: FragmentHomeBinding
+    lateinit var navController: NavController
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        signUpButton=view.findViewById(R.id.signupButton)
-        loginButton=view.findViewById(R.id.loginButton)
+        fragmentHomeBinding= FragmentHomeBinding.bind(view)
+         navController=Navigation.findNavController(view)
 
-        var navController=Navigation.findNavController(view)
-
-        signUpButton.setOnClickListener {
+        fragmentHomeBinding.signupButton.setOnClickListener {
             navController.navigate(R.id.action_homeFragment_to_signUpFragment)
         }
-        loginButton.setOnClickListener {
+        fragmentHomeBinding.loginButton.setOnClickListener {
             navController.navigate(R.id.action_homeFragment_to_loginFragment)
         }
 
+
     }
 
 
+    /*  override fun onCreate(savedInstanceState: Bundle?) {
+          super.onCreate(savedInstanceState)
+          arguments?.let {
+              param1 = it.getString(ARG_PARAM1)
+              param2 = it.getString(ARG_PARAM2)
+          }
+      }
 
-  /*  override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
-
-    companion object {
-        *//**
+      companion object {
+          *//**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
