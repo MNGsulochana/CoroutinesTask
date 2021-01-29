@@ -3,6 +3,8 @@ package com.example.coroutinesample.datamodel
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import dagger.Provides
+
 
 @Entity(tableName = "PostItems")
 data class PostModelItem(

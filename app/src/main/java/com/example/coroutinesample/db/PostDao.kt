@@ -5,9 +5,12 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.coroutinesample.datamodel.PostModelItem
+import dagger.Provides
+
 
 @Dao
-interface PostDao {
+
+interface PostDao{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllPosts(postModelItem: List<PostModelItem>?)
 

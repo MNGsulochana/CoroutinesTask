@@ -1,62 +1,79 @@
 package com.example.coroutinesample.ui
 
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coroutinesample.R
 import com.example.coroutinesample.adapter.PostAdapter
-import com.example.coroutinesample.api.apiClient
+import com.example.coroutinesample.api.ApiInterface
 import com.example.coroutinesample.datamodel.PostModelItem
 import com.example.coroutinesample.db.AppDataBase
+import com.example.coroutinesample.di.scope.AppScope
+import com.example.coroutinesample.di.scope.DbInfo
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.coroutines.*
+import java.lang.Exception
+import javax.inject.Inject
 
 
-//https://jsonplaceholder.typicode.com/users
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity() {
 
-    lateinit var  recyclerView: RecyclerView
-    private lateinit var postAdapter: PostAdapter
+    lateinit var recyclerView: RecyclerView
+   // private lateinit var postAdapter: PostAdapter
+
+    @Inject
+    lateinit var apiInterface: ApiInterface
+
+    @Inject
+    lateinit var postAdapter: PostAdapter
+
+    /*@Inject
+    @AppScope
+    lateinit var context: Context*/
+
+    @Inject
+    lateinit var appDataBase: AppDataBase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        recyclerView=findViewById(R.id.recyclerViewpost)
-        val client = apiClient.getClient()
-        GlobalScope.launch {
-            val resultPosts = client.getPosts()
-            withContext(Dispatchers.IO)
-            {
-                val dbInstance=AppDataBase.getDatabase(this@MainActivity)
+        recyclerView=findViewById(R.id.recyclerViewp)
 
-                if (resultPosts.isSuccessful) {
-                        Log.d("getvalues","${resultPosts.body()}")
-                    val postList:List<PostModelItem> = resultPosts.body()!!
-                   // for (i in postList)
-                       // dbInstance?.postDao()?.insertPost(i)
-                        dbInstance?.postDao()?.insertAllPosts(postList)
-
-                    postAdapter = PostAdapter(dbInstance?.postDao()?.getAllPosts() as ArrayList,context = this@MainActivity)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                var postLists = apiInterface.getPosts()
+                withContext(Dispatchers.IO)
+                {
+                    val dbInstance=appDataBase.postDao()
+                    dbInstance.insertAllPosts(postLists.body())
                     withContext(Dispatchers.Main)
                     {
-                        setAdapter(postAdapter)
+                        setAdapter(dbInstance.getAllPosts())
                     }
-                } else
-                    Log.d("fail", "falsls")
+                }
+
+            } catch (e: Exception) {
+
             }
+
+
         }
 
     }
-
-    fun setAdapter(postAdapter: PostAdapter)
+    fun setAdapter(postList: List<PostModelItem>?)
     {
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerView.layoutManager = layoutManager
         recyclerView.itemAnimator = DefaultItemAnimator()
+        postList?.let { postAdapter.setPostList(it) }
         recyclerView.adapter = this.postAdapter
-        this.postAdapter.notifyDataSetChanged()
+
+
     }
 }
+
+//https://jsonplaceholder.typicode.com/users

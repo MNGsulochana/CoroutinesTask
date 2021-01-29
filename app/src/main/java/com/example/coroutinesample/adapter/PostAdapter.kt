@@ -14,8 +14,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class PostAdapter(private var postsList:List<PostModelItem>,private var context:Context) :RecyclerView.Adapter<PostAdapter.PostViewHolder>(){
+//class PostAdapter(private var postsList:List<PostModelItem>,private var context:Context) :RecyclerView.Adapter<PostAdapter.PostViewHolder>()
+
+class PostAdapter :RecyclerView.Adapter<PostAdapter.PostViewHolder>()
+
+{
+    lateinit var postsList: List<PostModelItem>
+
+    fun setPostList(postsList:List<PostModelItem>)
+    {
+        this.postsList=postsList
+    }
     class PostViewHolder(view:View):RecyclerView.ViewHolder(view)
     {
         var title: TextView = view.findViewById(R.id.textTitle)
