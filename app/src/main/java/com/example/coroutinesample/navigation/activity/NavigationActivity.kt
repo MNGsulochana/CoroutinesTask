@@ -25,27 +25,23 @@ class NavigationActivity : AppCompatActivity() {
         navController=findNavController(R.id.nav_hostFragment)
        // val navController = findNavController(R.id.nav_hostFragment)
       // val navController = Navigation.findNavController(this, R.id.nav_hostFragment)
-       actionBarTitle= AppBarConfiguration(setOf(R.id.homeFragment,R.id.signUpFragment,R.id.loginFragment))
+     //  actionBarTitle= AppBarConfiguration(setOf(R.id.homeFragment,R.id.signUpFragment,R.id.loginFragment))
        // navController.navigate()
        // setupBottomNavMenu(navController)
-        setupActionBarWithNavController(navController,actionBarTitle)
-        //setupActionBar(navController)
+        //setupActionBarWithNavController(navController,actionBarTitle)
+        setupActionBar(navController)
     }
 
     private fun setupActionBar(navController: NavController) {
         NavigationUI.setupActionBarWithNavController(this,navController)
 
     }
-    override fun onSupportNavigateUp(): Boolean {
+   /* override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(actionBarTitle) ||super.onSupportNavigateUp()
         //return NavigationUI.navigateUp(navActivityLayout,Navigation.findNavController(this,R.id.nav_hostFragment))
     }
-    private fun setupBottomNavMenu(navController: NavController)
-    {
-        activityNavigationBinding.bottomNavigation.setupWithNavController(navController)
 
-    }
-
+*/
 
 
 }
